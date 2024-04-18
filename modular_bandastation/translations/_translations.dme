@@ -1,4 +1,0 @@
-#include "_translations.dm"
-
-#include "code/moustache.dm"
-#include "code/restaurant_customer.dm"
