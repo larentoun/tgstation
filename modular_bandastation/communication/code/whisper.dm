@@ -23,3 +23,10 @@
 			client.mob.whisper_verb(entry)
 			return TRUE
 	. = ..()
+
+/obj/item/gun/energy/laser/awaymission_aeg
+	name = "Exploreverse Mk.I"
+	ammo_type = list(/obj/item/ammo_casing/energy/lasergun/awaymission_aeg)
+
+/obj/item/ammo_casing/energy/lasergun/awaymission_aeg
+	e_cost = LASER_SHOTS(20, STANDARD_CELL_CHARGE)
