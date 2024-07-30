@@ -1648,8 +1648,8 @@
 /obj/item/card/id/advanced/chameleon/attack_self(mob/user)
 	if(!user.can_perform_action(user, NEED_DEXTERITY| FORBID_TELEKINESIS_REACH))
 		return ..()
-	var/popup_input = tgui_input_list(user, "Choose Action", "Agent ID", list("Show", "Edit"))
-	if(!popup_input || !after_input_check(user))
+	var/alert = tgui_alert(user, "Choose Action", "Agent ID", list("Show", "Edit"))
+	if(!alert || !after_input_check(user))
 		return TRUE
 	switch(popup_input)
 		if("Edit")
@@ -1657,10 +1657,7 @@
 			forged = TRUE
 			ui_interact(user)
 			return
-		if("Show")
-			return ..()
-
-	set_new_account(user)
+	return ..()
 
 /obj/item/card/id/advanced/chameleon/proc/reset_card()
 	var/response = tgui_alert(usr, "Are you sure you want to delete all card info?","Delete Card Info", list("No", "Yes"))
