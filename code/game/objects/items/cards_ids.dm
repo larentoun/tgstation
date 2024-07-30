@@ -1736,7 +1736,7 @@
 	var/mob/living/carbon/human/accountowner = usr
 	var/money_account = tgui_input_text(usr, "Choose the Money Account", "Money Account", accountowner.account_id)
 	if(!after_input_check(usr))
-		return
+		return TRUE
 	var/datum/bank_account/account = SSeconomy.bank_accounts_by_id["[money_account]"]
 	if(account)
 		account.bank_cards |= src
@@ -1757,6 +1757,7 @@
 	if("No")
 		REMOVE_TRAIT(src, TRAIT_MAGNETIC_ID_CARD, CHAMELEON_ITEM_TRAIT)
 		usr.log_message("forged \the [initial(name)]: wallet spoofing is set to \"disabled\".", LOG_GAME)
+		return TRUE
 
 /obj/item/card/id/advanced/chameleon/proc/after_input_check(mob/user)
 	if(QDELETED(user) || QDELETED(src) || !user.client || !user.can_perform_action(src, NEED_DEXTERITY|FORBID_TELEKINESIS_REACH))
