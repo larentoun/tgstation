@@ -1629,7 +1629,7 @@
 			update_label()
 			update_icon()
 		if("modify_trim")
-			modify_trim()
+			modify_trim(params)
 			update_label()
 			update_icon()
 		if("change_occupation")
@@ -1638,8 +1638,6 @@
 			update_icon()
 		if("change_age")
 			change_age()
-			update_label()
-			update_icon()
 		if("change_money_account")
 			change_money_account()
 		if("change_wallet_spoofing")
@@ -1697,7 +1695,7 @@
 	return TRUE
 
 // TODO: Move it to a new window
-/obj/item/card/id/advanced/chameleon/proc/modify_trim()
+/obj/item/card/id/advanced/chameleon/proc/modify_trim(params)
 	var/selected_trim_path = tgui_input_list(usr, "Select trim to apply to your card.\nNote: This will not grant any trim accesses.", "Forge Trim", sort_list(trim_list, GLOBAL_PROC_REF(cmp_typepaths_asc)))
 	if(!after_input_check(usr))
 		return TRUE
