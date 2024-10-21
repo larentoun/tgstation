@@ -18,10 +18,9 @@ Created the table: battlepass
 
 ```sql
 CREATE TABLE `battlepass` (
-    `id` INT(11) NOT NULL AUTO_INCREMENT,
     `ckey` VARCHAR(32) NULL DEFAULT NULL COLLATE 'utf8mb4_unicode_ci',
     `score` INT(10) UNSIGNED NOT NULL,
-    PRIMARY KEY (`id`) USING BTREE
+    PRIMARY KEY (`ckey`) USING BTREE
 ) COLLATE='utf8mb4_general_ci' ENGINE=InnoDB;
 ```
 -----------------------------------------------------

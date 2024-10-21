@@ -25,25 +25,31 @@ SUBSYSTEM_DEF(battlepass)
 /datum/controller/subsystem/battlepass/proc/save_scores()
 	var/list/scores_to_modify = list()
 	for(var/ckey in modify_list)
-		if(!ckey || !modify_list[ckey])
+		if(!ckey || !modify_list[ckey] || modify_list[ckey] < 0)
 			continue
-		var/list/score_by_ckey = list("[ckey]" = max(modify_list[ckey], 0))
+		var/new_score = modify_list[ckey]
 		var/datum/db_query/query = SSdbcore.NewQuery({"
 			SELECT ckey, score FROM battlepass
 			WHERE ckey=:ckey
 		"}, list("ckey" = ckey))
 		// Player is not in the DB
 		if(!query)
-			scores_to_modify[++scores_to_modify.len] += score_by_ckey
+			scores_to_modify += list(list(
+				"ckey" = ckey,
+				"score" = new_score,
+			))
 			continue
 		if(!query.warn_execute())
 			qdel(query)
 			continue
 		query.NextRow()
-		score_by_ckey += list("[ckey]" = query.item[2])
+		new_score += query.item[2]
 		qdel(query)
 
-		scores_to_modify[++scores_to_modify.len] += score_by_ckey
+		scores_to_modify += list(list(
+			"ckey" = ckey,
+			"score" = new_score,
+		))
 	if(!length(scores_to_modify))
 		return
 	SSdbcore.MassInsert(format_table_name("battlepass"), scores_to_modify)
