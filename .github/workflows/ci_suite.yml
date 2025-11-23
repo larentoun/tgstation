@@ -15,7 +15,6 @@ concurrency:
 
 jobs:
   start_gate: # BANDASTATION EDIT: Added Merge Upstream title check.
-    if: ( !contains(github.event.head_commit.message, '[ci skip]') || contains(github.event.pull_request.title, 'Merge Upstream'))
     name: Start Gate
     runs-on: ubuntu-latest
     steps:
