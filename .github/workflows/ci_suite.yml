@@ -15,6 +15,7 @@ concurrency:
 
 jobs:
   start_gate: # BANDASTATION EDIT: Added Merge Upstream title check.
+    if: true
     name: Start Gate
     runs-on: ubuntu-latest
     steps:
